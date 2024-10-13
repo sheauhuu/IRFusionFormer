@@ -1,0 +1,55 @@
+# General Settings
+phase: train
+
+### Data Settings
+# modality: t1
+cache_dataset: True
+list_root: path/to/your/Dataset/00_List
+rgb_root: path/to/your/Dataset/01_Visible_Image
+gt_root: path/to/your/Dataset/04_Ground_Truth
+infrared_root: path/to/your/Dataset/02_Infrared_Image
+# # use additional data?
+# use_harmonization_data: False
+# harmonization_dir: ./data/atlas_PIF/
+ckpt_path: ./ckpt/
+test_ckpt_path: ./ckpt/CrackFormer.ckpt
+# img_size: [224, 224]
+img_size: [480, 480]
+aux_loss_weight: 0.1
+# Pretrained Weight
+# pretrained: ./ckpt/202311181803/epoch6_net.pth
+# if you want to use universeg pretrained weight, set pretrained: True
+pretrained: False
+
+# Some Settings
+GPUs: [0]
+num_workers: 1
+train_batch_size: 16
+val_batch_size: 1
+seed: 1234
+# train_folds: [0, 1, 2, 3]
+# valid_folds: [4]
+lr: 0.005
+weight_decay: 0.001
+verbose: False # whether print net or not
+
+# Training settings
+epochs: 50
+valid_epoch_freq: 5
+save_epoch_freq: 5
+save_iter_freq: 4000
+print_iter_freq: 10
+early_stop: True
+
+# Model Settings
+# available models: 'universeg'
+model: UNet
+input_type: rgb
+
+# Loss Function
+weighted_loss: True
+temperature: 1000
+loss_type: {'Dice':0, 'BCE':0, 'Focal':0, 'CE':1.0, 'SoftCLDice':0}
+# loss_type: {'BCE':1.0}
+# loss_type: {'CE':1.0}
+transform: False
